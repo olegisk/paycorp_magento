@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Paycorp_Payments>
+            <version>1.0.0</version>
+        </Paycorp_Payments>
+    </modules>
+
+    <global>
+        <models>
+            <paycorp>
+                <class>Paycorp_Payments_Model</class>
+                <resourceModel>paycorp_mysql4</resourceModel>
+            </paycorp>
+        </models>
+
+        <!-- IMPORTANT: if you use your own namespace (i.e. CompanyName) you also have to declare blocks group for new module. See topic: http://www.magentocommerce.com/boards/viewthread/22416/#t102732 -->
+        <blocks>
+            <paycorp>
+                <class>Paycorp_Payments_Block</class>
+            </paycorp>
+        </blocks>
+
+        <helpers>
+            <paycorp>
+                <class>Paycorp_Payments_Helper</class>
+            </paycorp>
+        </helpers>
+
+        <!-- declare resource setup for new module -->
+        <resources>
+            <!-- resource identifier -->
+            <paycorp_setup>
+                <!-- specify that this resource is a setup resource and used for upgrades -->
+                <setup>
+                    <!-- which module to look for install/upgrade files in -->
+                    <module>Paycorp_Payments</module>
+                </setup>
+                <!-- specify database connection for this resource -->
+                <connection>
+                    <!-- do not create new connection, use predefined core setup connection -->
+                    <use>core_setup</use>
+                </connection>
+            </paycorp_setup>
+            <paycorp_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </paycorp_write>
+            <paycorp_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </paycorp_read>
+        </resources>
+    </global>
+
+    <!-- declare default configuration values for this module -->
+    <default>
+        <!-- 'payment' configuration section (tab) -->
+        <payment>
+            <!-- 'newmodule' configuration group (fieldset) -->
+            <paycorp_cc>
+                <!-- by default this payment method is inactive -->
+                <active>1</active>
+                <!-- model to handle logic for this payment method -->
+                <model>paycorp/method_CC</model>
+                <!-- default title for payment checkout page and order view page -->
+                <title>Credit Card (Paycorp)</title>
+                <pg_domain>https://sampath.paycorp.com.au/rest/service/proxy</pg_domain>
+                <transaction_type>PURCHASE</transaction_type>
+            </paycorp_cc>
+        </payment>
+    </default>
+
+    <frontend>
+        <routers>
+            <paycorp>
+                <use>standard</use>
+                <args>
+                    <module>Paycorp_Payments</module>
+                    <frontName>paycorp</frontName>
+                </args>
+            </paycorp>
+        </routers>
+
+        <!-- Translations... -->
+        <translate>
+            <modules>
+                <Paycorp_Payments>
+                    <files>
+                        <default>Paycorp_Payments.csv</default>
+                    </files>
+                </Paycorp_Payments>
+            </modules>
+        </translate>
+    </frontend>
+</config>

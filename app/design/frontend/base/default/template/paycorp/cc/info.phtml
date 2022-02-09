@@ -1,0 +1,11 @@
+<?php
+/** @var $this Paycorp_Payments_Block_Info_CC */
+?>
+
+<p><?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?></p>
+<?php $trans_id = $this->getInfo()->getLastTransId(); ?>
+<?php if (!empty($trans_id)): ?>
+
+<?php else: ?>
+    <?php echo Mage::helper('paygate')->__('Payment has not been processed yet.'); ?>
+<?php endif; ?>

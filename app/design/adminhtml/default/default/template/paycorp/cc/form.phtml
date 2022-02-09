@@ -1,0 +1,18 @@
+<?php
+/** @var $this Paycorp_Payments_Block_Form_CC */
+?>
+
+<fieldset class="form-list">
+    <?php $_code=$this->getMethodCode() ?>
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <li>
+            <div style="float:left">
+                <!-- <img src="<?php echo Mage::getDesign()->getSkinUrl('images/paycorp/paycorp.png'); ?>" alt="Paycorp" /><br /> -->
+            </div>
+            <div style="float:left">
+                <?php echo Mage::helper('paycorp')->__('You will be redirected to Paycorp website when you place an order.'); ?>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </li>
+    </ul>
+</fieldset>
